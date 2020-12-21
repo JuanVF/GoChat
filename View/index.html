@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Chat</title>
+    <link rel="stylesheet" href="/components.css">
+    <link rel="stylesheet" href="/chat.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="neo-container-out-sm">
+        <div class="messages">
+            <h1 class="neo-h1">Chat</h1>
+            <div id="chat-container" class="neo-container-in">
+                
+            </div>
+            <div class="send-message">
+                <input id="msg" type="text" placeholder="Type your message" class="neo-input">
+                <button onclick="sendMessage()" class="neo-button">Send message</button>
+            </div>
+        </div>    
+        <div class="profile">
+            <h1 class="neo-h1">User Info</h1>
+            <p>User name:</p>
+            <input id="user-name" type="text" placeholder="Type your username..." class="neo-input">
+        </div>    
+    </main>
+    <script>
+        let userInput = document.getElementById("user-name")
+        let msgInput = document.getElementById("msg")
+
+        let msgContainer = document.getElementById("chat-container")
+        
+        // Inicializamos el socket
+        let socket = new WebSocket("ws://localhost:3000/api/chat")
+
+        socket.onopen = () => {
+            console.log("Successfull conn")
+        }
+
+        socket.onmessage = msg => {
+            let msgInfo = JSON.parse(msg.data)
+
+            let newMsg = document.createElement("p")
+            let data = document.createTextNode(msgInfo.username + ": " + msgInfo.message)
+
+            newMsg.appendChild(data)
+
+            msgContainer.appendChild(newMsg)
+        }
+
+        socket.onclose = event => {
+            console.log("Socket was closed!", event)
+        }
+
+        socket.onerror = err => {
+            console.log("Socket error: ", err)
+        }
+        
+        function sendMessage(){
+            let user = userInput.value
+            let data = msgInput.value
+
+            if (user === "" || data === ""){
+                alert("Rellene los campos")
+
+                return
+            }
+
+            let msg = {
+                "username" : user,
+                "message" : data
+            }   
+
+            socket.send(JSON.stringify(msg))
+
+            msgInput.value = ""
+        }
+    </script>
+</body>
+</html>

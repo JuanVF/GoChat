@@ -1,0 +1,459 @@
+:root {
+  /* 
+        MAIN COLOURS
+    */
+  --main-color: #eff2f9;
+  --main-dk-color: #eaedf3;
+  --bg-color: #d5d5d5;
+  --shadow-color-1: rgba(250, 251, 255, 0.7);
+  --shadow-color-2: rgba(22, 27, 29, 0.1);
+  --shadow-color-3: rgba(250, 251, 255, 0.2);
+  --font-color: #6e7f8d;
+
+  --color-cyan: #00bcd4;
+  --color-blue: #1f3c88;
+  --color-red: #d7385e;
+  --color-green: #0c9463;
+  --color-orange: #ee6f57;
+  --color-purple: #7579e7;
+
+  /*
+        SHADOWS
+    */
+  --shadow-in-1: inset -5px -5px 5px var(--shadow-color-1);
+  --shadow-in-2: inset 5px 5px 5px var(--shadow-color-2);
+  --shadow-in-3: inset -5px -5px 5px var(--shadow-color-3);
+
+  --shadow-1: -5px -5px 5px var(--shadow-color-1);
+  --shadow-2: 5px 5px 5px var(--shadow-color-2);
+
+  --shadow-1-md: -5px -5px 10px var(--shadow-color-1);
+  --shadow-2-md: 5px 5px 10px var(--shadow-color-2);
+
+  --shadow-1-xl: -5px -5px 15px var(--shadow-color-1);
+  --shadow-2-xl: 5px 5px 15px var(--shadow-color-2);
+
+  /*
+        GENERAL PURPOSE
+    */
+  --zoom-ratio: scale(1.05);
+  --padding-md: 15px 20px;
+}
+
+/*
+    GENERAL PURPOSE
+*/
+.neo-container-in,
+.neo-container-out-sm,
+.neo-container-out-md,
+.neo-container-out-xl,
+.neo-button,
+.neo-button-md,
+.neo-button-xl,
+.neo-round-button,
+.neo-input,
+.neo-text-area,
+.neo-drop-down,
+.neo-date-picker {
+  box-sizing: border-box;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+}
+
+.neo-button,
+.neo-button-md,
+.neo-button-xl,
+.neo-input,
+.neo-text-area,
+.neo-round-button,
+.neo-drop-down,
+.neo-date-picker {
+  outline: none;
+  border: none;
+  padding: var(--padding-md);
+}
+
+/*
+    CONTAINERS
+*/
+.neo-container-in,
+.neo-container-out-sm,
+.neo-container-out-md,
+.neo-container-out-xl {
+  padding: 20px;
+}
+
+/*
+    BUTTONS
+*/
+
+.neo-button:hover,
+.neo-button-md:hover,
+.neo-button-xl:hover,
+.neo-round-button:hover {
+  cursor: pointer;
+  transform: var(--zoom-ratio);
+  background-color: var(--main-dk-color);
+}
+
+.neo-button:active,
+.neo-button-md:active,
+.neo-button-xl:active,
+.neo-round-button:active {
+  background-color: var(--bg-color);
+}
+
+.neo-round-button {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  border-radius: 100%;
+}
+/*
+    INPUTS
+*/
+
+/* This is to avoid a bug when shadows go outside the text-area :(*/
+.neo-text-area {
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.neo-input {
+  border-radius: 40px;
+}
+
+.neo-input,
+.neo-text-area {
+  font-weight: bold;
+  color: black;
+}
+
+.neo-text-area::-webkit-scrollbar {
+  width: 1em;
+}
+
+.neo-text-area::-webkit-scrollbar-track {
+  box-shadow: var(--shadow-in-1), var(--shadow-in-2);
+}
+
+.neo-text-area::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 20px;
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow-1), var(--shadow-2);
+}
+
+.neo-input::placeholder,
+.neo-text-area::placeholder {
+  color: var(--font-color);
+}
+
+/*
+    CHECK BOX & RADIO BUTTON
+*/
+
+.neo-cb-container,
+.neo-rb-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.neo-cb,
+.neo-rb {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.neo-cb-label,
+.neo-rb-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: var(--main-color);
+}
+
+.neo-cb-label {
+  border-radius: 5px;
+}
+
+.neo-rb-label {
+  border-radius: 100%;
+  box-shadow: var(--shadow-in-1), var(--shadow-in-2);
+}
+
+.neo-cb-container:hover .neo-cb ~ .neo-cb-label {
+  background-color: var(--main-dk-color);
+}
+
+.neo-cb-container
+  .neo-cb:checked
+  ~ .neo-cb-label
+  .neo-rb-container
+  .neo-rb:checked
+  ~ .neo-rb-label {
+  box-shadow: var(--shadow-1), var(--shadow-2);
+}
+
+.neo-cb-container .neo-cb:disabled ~ .neo-cb-label,
+.neo-rb-container .neo-rb:disabled ~ .neo-rb-label {
+  background: var(--bg-color);
+  box-shadow: var(--shadow-in-3), var(--shadow-in-2);
+}
+
+.neo-cb-label:after,
+.neo-rb-label:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.neo-cb-container .neo-cb:checked ~ .neo-cb-label:after,
+.neo-rb-container .neo-rb:checked ~ .neo-rb-label:after {
+  display: block;
+}
+
+/* Checkbox colors */
+.neo-cb-container .neo-cb-label:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--font-color);
+}
+
+.neo-cb-container .neo-cb-cyan:after {
+  border: solid var(--color-cyan);
+}
+
+.neo-cb-container .neo-cb-blue:after {
+  border: solid var(--color-blue);
+}
+
+.neo-cb-container .neo-cb-red:after {
+  border: solid var(--color-red);
+}
+
+.neo-cb-container .neo-cb-green:after {
+  border: solid var(--color-green);
+}
+
+.neo-cb-container .neo-cb-orange:after {
+  border: solid var(--color-orange);
+}
+
+.neo-cb-container .neo-cb-purple:after {
+  border: solid var(--color-purple);
+}
+
+.neo-cb-container .neo-cb-label:after,
+.neo-cb-container .neo-cb-blue:after,
+.neo-cb-container .neo-cb-red:after,
+.neo-cb-container .neo-cb-green:after,
+.neo-cb-container .neo-cb-orange:after,
+.neo-cb-container .neo-cb-purple:after,
+.neo-cb-container .neo-cb-label:after {
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Radio button colors */
+.neo-rb-container .neo-rb-label:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--font-color);
+}
+
+.neo-rb-container .neo-rb-cyan:after {
+  background: var(--color-cyan);
+}
+
+.neo-rb-container .neo-rb-blue:after {
+  background: var(--color-blue);
+}
+
+.neo-rb-container .neo-rb-red:after {
+  background: var(--color-red);
+}
+
+.neo-rb-container .neo-rb-green:after {
+  background: var(--color-green);
+}
+
+.neo-rb-container .neo-rb-orange:after {
+  background: var(--color-orange);
+}
+
+.neo-rb-container .neo-rb-purple:after {
+  background: var(--color-purple);
+}
+
+/*
+    SWITCH
+*/
+
+.neo-switch-container {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.neo-switch {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.neo-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--main-color);
+  box-shadow: var(--shadow-in-1), var(--shadow-in-2);
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.neo-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 35px;
+  left: 0px;
+  bottom: 0px;
+  background-color: var(--main-color);
+  box-shadow: var(--shadow-1), var(--shadow-2);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.neo-switch:checked + .neo-switch-slider {
+  background-color: var(--color-cyan);
+  box-shadow: var(--shadow-in-3), var(--shadow-in-2);
+}
+
+.neo-switch:disabled + .neo-switch-slider {
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow-in-3), var(--shadow-in-2);
+}
+
+.neo-switch:checked + .neo-switch-blue {
+  background-color: var(--color-blue);
+}
+
+.neo-switch:checked + .neo-switch-green {
+  background-color: var(--color-green);
+}
+
+.neo-switch:checked + .neo-switch-red {
+  background-color: var(--color-red);
+}
+
+.neo-switch:checked + .neo-switch-orange {
+  background-color: var(--color-orange);
+}
+
+.neo-switch:checked + .neo-switch-purple {
+  background-color: var(--color-purple);
+}
+
+.neo-switch:checked + .neo-switch-slider:before {
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  transform: translateX(30px);
+  box-shadow: var(--shadow-2);
+}
+
+/*
+    TEXT
+*/
+
+.neo-h1,
+.neo-h2,
+.neo-h3,
+.neo-h4,
+.neo-h5,
+.neo-h6 {
+  font-weight: bold;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--shadow-color-2);
+}
+
+.neo-h1 {
+  font-size: 1.8em;
+}
+
+.neo-h2 {
+  font-size: 1.5em;
+}
+
+.neo-h3 {
+  font-size: 1.2em;
+}
+
+.neo-h4 {
+  font-size: 1em;
+}
+
+.neo-h5 {
+  font-size: 0.8em;
+}
+
+.neo-h6 {
+  font-size: 0.6em;
+}
+
+/*
+    SHADOWS
+*/
+.neo-container-in,
+.neo-input,
+.neo-text-area,
+.neo-cb-label {
+  box-shadow: var(--shadow-in-1), var(--shadow-in-2);
+}
+
+.neo-container-out-sm,
+.neo-button,
+.neo-round-button,
+.neo-drop-down,
+.neo-date-picker {
+  box-shadow: var(--shadow-1), var(--shadow-2);
+}
+
+.neo-container-out-md,
+.neo-button-md {
+  box-shadow: var(--shadow-1-md), var(--shadow-2-md);
+}
+
+.neo-container-out-xl,
+.neo-button-xl {
+  box-shadow: var(--shadow-1-xl), var(--shadow-2-xl);
+}
